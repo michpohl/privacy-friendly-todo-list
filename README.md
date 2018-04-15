@@ -1,7 +1,8 @@
 ﻿# Privacy Friendly To-Do List
 
 This is a fork of SecUSo's To-Do-List for the purpose of adding a few little tweaks for my personal use. Once implemented, I'll add documentation and a new readme.
-This is the original
+
+This is all the original information:
 
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=org.secuso.privacyfriendlytodolist)
 
