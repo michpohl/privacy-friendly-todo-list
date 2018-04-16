@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,12 @@ import java.util.Map;
 public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
 
     private SharedPreferences prefs;
+
+    public void setCurrentListColor(int currentListColor) {
+        Log.d("","Setting current list color to" +  currentListColor);
+        this.currentListColor = currentListColor;
+    }
+
     private int currentListColor = 222222;
 
     // left item: task that was long clicked
@@ -464,7 +471,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
                 vh2.deadline.setText(deadline);
                 vh2.deadlineColorBar.setBackgroundColor(Helper.getDeadlineColor(context, currentTask.getDeadlineColor(getDefaultReminderTime())));
                 vh2.done.setChecked(currentTask.getDone());
-                vh2.colorIndicator.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                vh2.colorIndicator.setBackgroundColor(currentTask.getColor());
 
 
                 vh2.done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

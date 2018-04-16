@@ -180,6 +180,11 @@ public class TodoTasksFragment extends Fragment implements SearchView.OnQueryTex
 
         // react when task expands
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                return false;
+            }
+
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 

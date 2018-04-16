@@ -20,6 +20,7 @@ package org.secuso.privacyfriendlytodolist.model.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 
 import org.secuso.privacyfriendlytodolist.model.TodoList;
@@ -133,10 +134,12 @@ public class DBQueryHandler {
         int reminderTime = cursor.getInt(cursor.getColumnIndex(TTodoTask.COLUMN_DEADLINE_WARNING_TIME));
         int priority = cursor.getInt(cursor.getColumnIndex(TTodoTask.COLUMN_PRIORITY));
         int listID = cursor.getInt(cursor.getColumnIndex(TTodoTask.COLUMN_TODO_LIST_ID));
+        String color = cursor.getString(cursor.getColumnIndex(TTodoTask.COLUMN_COLOR));
         boolean inTrash = cursor.getInt(cursor.getColumnIndex(TTodoTask.COLUMN_TRASH)) > 0;
 
         TodoTask task = new TodoTask();
         task.setName(title);
+        task.setColor(Color.parseColor(color));
         task.setDeadline(deadline);
         task.setDescription(description);
         task.setPriority(TodoTask.Priority.fromInt(priority));
@@ -208,10 +211,12 @@ public class DBQueryHandler {
                         boolean done = c.getInt(c.getColumnIndex(TTodoTask.COLUMN_DONE)) > 0;
                         int reminderTime = c.getInt(c.getColumnIndex(TTodoTask.COLUMN_DEADLINE_WARNING_TIME));
                         boolean inTrash = c.getInt(c.getColumnIndex(TTodoTask.COLUMN_TRASH)) > 0;
+                        String color = c.getString(c.getColumnIndex(TTodoTask.COLUMN_COLOR));
 
 
                         TodoTask currentTask = new TodoTask();
                         currentTask.setName(taskName);
+                        currentTask.setColor(Color.parseColor(color));
                         currentTask.setDescription(taskDescription);
                         currentTask.setId(id);
                         currentTask.setSubTasks(getSubTasksByTaskId(db, id));
@@ -294,10 +299,15 @@ public class DBQueryHandler {
                         int id = cursor.getInt(cursor.getColumnIndex(TTodoList.COLUMN_ID));
                         String listName = cursor.getString(cursor.getColumnIndex(TTodoList.COLUMN_NAME));
 
+
+                        String listColor = cursor.getString(cursor.getColumnIndex(TTodoList.COLUMN_COLOR));
+
+
                         TodoList currentList = new TodoList();
                         currentList.setName(listName);
                         currentList.setId(id);
-                        currentList.setTasks(getTasksByListId(db, id, listName));
+                        currentList.setTasks(getTasksByListId(db, id, listName, listColor));
+                        currentList.setColor(listColor);
                         todoLists.add(currentList);
                     } while (cursor.moveToNext());
                 }
@@ -310,7 +320,7 @@ public class DBQueryHandler {
         return todoLists;
     }
 
-    private static ArrayList<TodoTask> getTasksByListId(SQLiteDatabase db, int listId, String listName) {
+    private static ArrayList<TodoTask> getTasksByListId(SQLiteDatabase db, int listId, String listName, String listColor) {
 
         ArrayList<TodoTask> tasks = new ArrayList<TodoTask>();
         String where = TTodoTask.COLUMN_TODO_LIST_ID + " = " + listId + " AND " + TTodoTask.COLUMN_TRASH + "=0";
@@ -322,6 +332,7 @@ public class DBQueryHandler {
 
                     TodoTask currentTask = extractTodoTask(cursor);
                     currentTask.setListName(listName);
+                    currentTask.setColor(Color.parseColor(listColor));
                     currentTask.setSubTasks(getSubTasksByTaskId(db, currentTask.getId()));
                     tasks.add(currentTask);
                 } while (cursor.moveToNext());
@@ -403,7 +414,7 @@ public class DBQueryHandler {
         int returnCode;
 
         if(todoTask.getDBState() != ObjectStates.NO_DB_ACTION) {
-
+            
             ContentValues values = new ContentValues();
             values.put(TTodoTask.COLUMN_NAME, todoTask.getName());
             values.put(TTodoTask.COLUMN_DESCRIPTION, todoTask.getDescription());
@@ -415,6 +426,8 @@ public class DBQueryHandler {
             values.put(TTodoTask.COLUMN_LIST_POSITION, todoTask.getListPosition());
             values.put(TTodoTask.COLUMN_DONE, todoTask.getDone());
             values.put(TTodoTask.COLUMN_TRASH, todoTask.isInTrash());
+            values.put(TTodoTask.COLUMN_COLOR, String.format("#%06X", (0xFFFFFF & todoTask.getColor())));
+
 
             if(todoTask.getDBState() == ObjectStates.INSERT_TO_DB) {
                 returnCode = (int) db.insert(TTodoTask.TABLE_NAME, null, values);
@@ -445,8 +458,12 @@ public class DBQueryHandler {
         // Log.i(TAG, "Changes of list " + currentList.getName() + " were stored in the database.");
 
         if(todoList.getDBState() != ObjectStates.NO_DB_ACTION) {
+            String hexColor = String.format("#%06X", (0xFFFFFF & todoList.getColor()));
+            Log.d("hexcolor: ", hexColor);
             ContentValues values = new ContentValues();
             values.put(TTodoList.COLUMN_NAME, todoList.getName());
+            values.put(TTodoList.COLUMN_COLOR, hexColor);
+
 
             if(todoList.getDBState() == ObjectStates.INSERT_TO_DB) {
                 returnCode = (int) db.insert(TTodoList.TABLE_NAME, null, values);
