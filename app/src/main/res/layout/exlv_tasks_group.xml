@@ -16,13 +16,13 @@
     <LinearLayout
         android:id="@+id/ll_cb_task_done"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="17dp">
+        android:layout_toEndOf="@id/v_urgency_task"
+        android:background="@color/colorAccent">
 
         <CheckBox
+
             android:id="@+id/cb_task_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,39 +46,39 @@
         android:layout_marginTop="10dp"
         android:text="Task Name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
 
     <TextView
         android:id="@+id/tv_exlv_task_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_exlv_task_name"
         android:layout_alignLeft="@+id/tv_exlv_task_name"
-        android:visibility="gone"
-        android:text="List name: " />
+        android:layout_below="@+id/tv_exlv_task_name"
+        android:text="List name: "
+        android:visibility="gone" />
 
 
     <TextView
         android:id="@+id/tv_exlv_task_deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_exlv_task_list_name"
         android:layout_alignLeft="@+id/tv_exlv_task_name"
+        android:layout_below="@+id/tv_exlv_task_list_name"
         android:text="Task Deadline" />
 
     <ProgressBar
         android:id="@+id/pb_task_progress"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv_exlv_task_deadline"
         android:layout_below="@+id/tv_exlv_task_deadline"
         android:layout_marginRight="10dp"
-        android:max="100"
         android:indeterminate="false"
-         />
+        android:max="100"
+        android:progress="1" />
 
     <View
         android:id="@+id/v_exlv_header_separator"

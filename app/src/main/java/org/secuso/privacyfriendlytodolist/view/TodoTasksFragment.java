@@ -154,6 +154,7 @@ public class TodoTasksFragment extends Fragment implements SearchView.OnQueryTex
     private void initExListViewGUI(View v) {
 
         taskAdapter = new ExpandableTodoTaskAdapter(getActivity(), todoTasks);
+        taskAdapter.setListColor(currentList.getColor());
         TextView emptyView = (TextView) v.findViewById(R.id.tv_empty_view_no_tasks);
         expandableListView = (ExpandableListView) v.findViewById(R.id.exlv_tasks);
         expandableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

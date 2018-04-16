@@ -27,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,6 +59,7 @@ import java.util.Map;
 public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
 
     private SharedPreferences prefs;
+    private int currentListColor = 222222;
 
     // left item: task that was long clicked
     // right item: subtask that was long clicked
@@ -126,6 +129,10 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
 
     public void setListNames(boolean flag) {
         showListName = flag;
+    }
+
+    public void setListColor(int color) {
+        this.currentListColor = color;
     }
 
     public void setLongClickedSubTaskByPos(int groupPosition, int childPosition) {
@@ -429,6 +436,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
                     vh2.deadlineColorBar = convertView.findViewById(R.id.v_urgency_task);
                     vh2.done.setTag(currentTask.getId());
                     vh2.done.setChecked(currentTask.getDone());
+                    vh2.colorIndicator = convertView.findViewById(R.id.rl_exlv_task_group_root);
 
                     convertView.setTag(vh2);
 
@@ -437,6 +445,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
                 }
 
                 vh2.name.setText(currentTask.getName());
+
                 getProgressDone(currentTask, hasAutoProgress());
                 vh2.progressBar.setProgress(currentTask.getProgress());
                 String deadline;
@@ -455,6 +464,9 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
                 vh2.deadline.setText(deadline);
                 vh2.deadlineColorBar.setBackgroundColor(Helper.getDeadlineColor(context, currentTask.getDeadlineColor(getDefaultReminderTime())));
                 vh2.done.setChecked(currentTask.getDone());
+                vh2.colorIndicator.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+
+
                 vh2.done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
@@ -616,6 +628,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
                 vh3.deadlineColorBar.setBackgroundColor(Helper.getDeadlineColor(context, currentTask.getDeadlineColor(getDefaultReminderTime())));
 
         }
+
         return convertView;
     }
 
@@ -645,6 +658,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
         public TextView name;
         public TextView deadline;
         public TextView listName;
+        public RelativeLayout colorIndicator;
         public CheckBox done;
         public View deadlineColorBar;
         public View seperator;
@@ -664,6 +678,7 @@ public class ExpandableTodoTaskAdapter extends BaseExpandableListAdapter {
     private class TaskDescriptionViewHolder {
         public TextView taskDescription;
         public View deadlineColorBar;
+        public View colorIndicator;
     }
 
     private class SettingViewHolder {
