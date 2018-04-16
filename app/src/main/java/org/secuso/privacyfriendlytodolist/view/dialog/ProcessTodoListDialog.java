@@ -108,7 +108,7 @@ public class ProcessTodoListDialog extends FullScreenDialog {
 
                 if (changesMade(listName)) {
                     todoList.setName(listName);
-                    todoList.setColor(listColor);
+                    todoList.setColor(String.format("#%06X", (0xFFFFFF & listColor)));
                     callback.finish(todoList);
                 }
                 self.dismiss();

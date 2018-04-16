@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/v_urgency_task"
-        android:background="@color/colorAccent">
+        >
 
         <CheckBox
 

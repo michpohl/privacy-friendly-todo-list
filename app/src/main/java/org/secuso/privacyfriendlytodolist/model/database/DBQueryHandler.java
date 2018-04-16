@@ -212,8 +212,6 @@ public class DBQueryHandler {
                         int reminderTime = c.getInt(c.getColumnIndex(TTodoTask.COLUMN_DEADLINE_WARNING_TIME));
                         boolean inTrash = c.getInt(c.getColumnIndex(TTodoTask.COLUMN_TRASH)) > 0;
                         String color = c.getString(c.getColumnIndex(TTodoTask.COLUMN_COLOR));
-
-
                         TodoTask currentTask = new TodoTask();
                         currentTask.setName(taskName);
                         currentTask.setColor(Color.parseColor(color));
@@ -414,7 +412,7 @@ public class DBQueryHandler {
         int returnCode;
 
         if(todoTask.getDBState() != ObjectStates.NO_DB_ACTION) {
-            
+
             ContentValues values = new ContentValues();
             values.put(TTodoTask.COLUMN_NAME, todoTask.getName());
             values.put(TTodoTask.COLUMN_DESCRIPTION, todoTask.getDescription());

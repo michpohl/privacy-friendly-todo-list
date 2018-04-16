@@ -37,7 +37,7 @@ public class TodoTask extends BaseTodo implements Parcelable {
     private static final String TAG = TodoTask.class.getSimpleName();
     public static final String PARCELABLE_KEY = "key_for_parcels";
 
-    public int color = R.color.grey;
+    public int color = R.color.my_grey;
 
 
     public enum Priority {
@@ -125,6 +125,7 @@ public class TodoTask extends BaseTodo implements Parcelable {
 
     public void setColor(int color) {
         this.color = color;
+        Log.d("Color set for task: ", String.format("#%06X", (0xFFFFFF & color)));
     }
 
 

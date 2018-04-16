@@ -66,6 +66,12 @@ public class Helper {
         throw new IllegalArgumentException("Deadline color not defined.");
     }
 
+    public static int getColor(Context context) {
+
+                return ContextCompat.getColor(context, R.color.deadline_red);
+        }
+
+
     public static String priority2String(Context context, Priority prio) {
 
         switch (prio) {
