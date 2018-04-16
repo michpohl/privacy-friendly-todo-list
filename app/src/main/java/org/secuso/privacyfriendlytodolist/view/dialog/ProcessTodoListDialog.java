@@ -21,7 +21,10 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.rtugeek.android.colorseekbar.ColorSeekBar;
 
 import org.secuso.privacyfriendlytodolist.R;
 import org.secuso.privacyfriendlytodolist.model.TodoList;
@@ -41,6 +44,9 @@ public class ProcessTodoListDialog extends FullScreenDialog {
     private Button buttonCancel;
     private EditText etName, etDescription;
     private TodoList todoList;
+    private ColorSeekBar colorSlider;
+    private TextView header;
+    private int listColor;
 
 
     public ProcessTodoListDialog(Context context) {
@@ -76,7 +82,18 @@ public class ProcessTodoListDialog extends FullScreenDialog {
             }
         });
         etName = (EditText) findViewById(R.id.et_todo_list_name);
+        header = (TextView) findViewById(R.id.tv_header);
+        colorSlider = (ColorSeekBar) findViewById(R.id.colorSlider);
+        colorSlider.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
+            @Override
+            public void onColorChangeListener(int i, int i1, int color) {
+                listColor = color;
+                header.setBackgroundColor(color);
+            }
+        });
     }
+
+
 
     private class OkayButtonListener implements View.OnClickListener {
         @Override
@@ -91,6 +108,7 @@ public class ProcessTodoListDialog extends FullScreenDialog {
 
                 if (changesMade(listName)) {
                     todoList.setName(listName);
+                    todoList.setColor(listColor);
                     callback.finish(todoList);
                 }
                 self.dismiss();

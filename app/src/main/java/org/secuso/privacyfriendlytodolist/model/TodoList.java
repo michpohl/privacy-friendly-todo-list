@@ -25,18 +25,29 @@ import java.util.ArrayList;
 
 /**
  * Created by Sebastian Lutz on 12.03.2018.
- *
+ * <p>
  * Class to set up a To-Do List and its parameters.
  */
 
-
-public class TodoList extends BaseTodo implements Parcelable{
+public class TodoList extends BaseTodo implements Parcelable {
 
     public static final String PARCELABLE_KEY = "PARCELABLE_KEY_FOR_TODO_LIST";
     public static final String UNIQUE_DATABASE_ID = "CURRENT_TODO_LIST_ID";
     public static final int DUMMY_LIST_ID = -3; // -1 is often used for error codes
+    public static final Parcelable.Creator<TodoList> CREATOR =
+            new Creator<TodoList>() {
+                @Override
+                public TodoList createFromParcel(Parcel source) {
+                    return new TodoList(source);
+                }
 
+                @Override
+                public TodoList[] newArray(int size) {
+                    return new TodoList[size];
+                }
+            };
     private ArrayList<TodoTask> tasks = new ArrayList<TodoTask>();
+    private int color = Color.BLACK;
 
     public TodoList(Parcel parcel) {
 
@@ -61,37 +72,28 @@ public class TodoList extends BaseTodo implements Parcelable{
         return tasks.size();
     }
 
-    public void setTasks(ArrayList<TodoTask> tasks) {
-        this.tasks = tasks;
-    }
-
     public ArrayList<TodoTask> getTasks() {
         return tasks;
     }
 
+    public void setTasks(ArrayList<TodoTask> tasks) {
+        this.tasks = tasks;
+    }
+
     public int getColor() {
-        return Color.BLACK;
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public int getDoneTodos() {
         int counter = 0;
-        for(TodoTask task : tasks)
+        for (TodoTask task : tasks)
             counter += task.getDone() == true ? 1 : 0;
         return counter;
     }
-
-    public static final Parcelable.Creator<TodoList> CREATOR =
-            new Creator<TodoList>() {
-                @Override
-                public TodoList createFromParcel(Parcel source) {
-                    return new TodoList(source);
-                }
-
-                @Override
-                public TodoList[] newArray(int size) {
-                    return new TodoList[size];
-                }
-            };
 
     @Override
     public int describeContents() {
@@ -108,11 +110,11 @@ public class TodoList extends BaseTodo implements Parcelable{
     public long getNextDeadline() {
 
         long minDeadLine = -1;
-        for(int i=0; i<tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
 
             TodoTask currentTask = tasks.get(i);
 
-            if(!currentTask.getDone()) {
+            if (!currentTask.getDone()) {
                 if (minDeadLine == -1 && currentTask.getDeadline() > 0)
                     minDeadLine = currentTask.getDeadline();
                 else {
@@ -144,7 +146,7 @@ public class TodoList extends BaseTodo implements Parcelable{
 
     public TodoTask.DeadlineColors getDeadlineColor(long defaultReminderTime) {
         int orangeCounter = 0;
-        for(TodoTask currentTask : tasks) {
+        for (TodoTask currentTask : tasks) {
             switch (currentTask.getDeadlineColor(defaultReminderTime)) {
                 case RED:
                     return TodoTask.DeadlineColors.RED;
@@ -155,11 +157,10 @@ public class TodoList extends BaseTodo implements Parcelable{
                     break;
             }
         }
-        if(orangeCounter > 0)
+        if (orangeCounter > 0)
             return TodoTask.DeadlineColors.ORANGE;
         return TodoTask.DeadlineColors.BLUE;
     }
-
 
     public boolean checkQueryMatch(String query, boolean recursive) {
         // no query? always match!
@@ -180,6 +181,5 @@ public class TodoList extends BaseTodo implements Parcelable{
     public boolean checkQueryMatch(String query) {
         return checkQueryMatch(query, true);
     }
-
 
 }

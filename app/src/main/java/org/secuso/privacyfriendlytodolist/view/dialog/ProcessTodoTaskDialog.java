@@ -18,9 +18,7 @@
 package org.secuso.privacyfriendlytodolist.view.dialog;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,8 +39,6 @@ import org.secuso.privacyfriendlytodolist.model.database.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.secuso.privacyfriendlytodolist.model.TodoList.DUMMY_LIST_ID;
 
 /**
  * Created by Sebastian Lutz on 12.03.2018.

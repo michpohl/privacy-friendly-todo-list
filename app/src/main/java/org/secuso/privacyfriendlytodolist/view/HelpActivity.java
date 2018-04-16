@@ -24,7 +24,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import org.secuso.privacyfriendlytodolist.view.ExpandableListAdapter;
 
 import org.secuso.privacyfriendlytodolist.R;
 

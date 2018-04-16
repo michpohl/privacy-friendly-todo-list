@@ -18,10 +18,8 @@
 package org.secuso.privacyfriendlytodolist.model.database;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import org.secuso.privacyfriendlytodolist.model.TodoList;

@@ -17,12 +17,9 @@
 
 package org.secuso.privacyfriendlytodolist.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -47,13 +44,10 @@ import org.secuso.privacyfriendlytodolist.model.TodoSubTask;
 import org.secuso.privacyfriendlytodolist.model.TodoTask;
 import org.secuso.privacyfriendlytodolist.model.Tuple;
 import org.secuso.privacyfriendlytodolist.model.database.DBQueryHandler;
-import org.secuso.privacyfriendlytodolist.model.database.tables.TTodoTask;
 import org.secuso.privacyfriendlytodolist.view.dialog.ProcessTodoSubTaskDialog;
 import org.secuso.privacyfriendlytodolist.view.dialog.ProcessTodoTaskDialog;
-import org.secuso.privacyfriendlytodolist.view.MainActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TodoTasksFragment extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -61,6 +55,7 @@ public class TodoTasksFragment extends Fragment implements SearchView.OnQueryTex
 
     // The fab is used to create new tasks. However, a task can only be created if the user is inside
     // a certain list. If he chose the "show all task" view, the option to create a new task is not available.
+
     public static final String SHOW_FLOATING_BUTTON = "SHOW_FAB";
     public static final String KEY = "fragment_selector_key";
 

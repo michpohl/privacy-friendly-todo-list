@@ -17,9 +17,7 @@
 
 package org.secuso.privacyfriendlytodolist.view.widget;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 import android.widget.RemoteViewsService;
 
 /**

@@ -1,9 +1,5 @@
 ﻿# Privacy Friendly To-Do List
 
-This is a fork of SecUSo's To-Do-List for the purpose of adding a few little tweaks for my personal use. Once implemented, I'll add documentation and a new readme.
-
-This is all the original information:
-
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=org.secuso.privacyfriendlytodolist)
 
 This application allows to create lists of tasks which can be individually managed. Each list contains a set of tasks. Each task can have a deadline, a reminder time and a list of subtasks. By setting a reminder time the user will be informed by a notification. It is possible to display all tasks in a calendar, to protect the app with a secret pin and to sort and prioritze tasks within a list. Colors indicate the urgency of a task (taking the deadline into account). 
@@ -38,5 +34,4 @@ Github-Users: <br />
 Dominik Puellen <br />
 Simon Breitfelder <br />
 Sebastian Lutz <br />
-Karola Marky (yonjuni) <br />
-Christopher Beckmann (Kamuno)
+Karola Marky (yonjuni)

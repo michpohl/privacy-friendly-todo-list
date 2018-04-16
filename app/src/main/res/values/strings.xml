@@ -1,13 +1,13 @@
 <resources>
     <!-- Application Specific -->
-    <string name="app_name">To-Do List</string>
-    <string name="app_name_long">Privacy Friendly To-Do List</string>
+    <string name="app_name">ToDoIt</string>
+    <string name="app_name_long">Privacy Friendly To-Do List Alternative</string>
     <string name="initial_alert">CLICK + FOR NEW LIST</string>
     <string name="second_alert">ADD NEW TASK ></string>
 
     <!-- Menu -->
-    <string name="nav_header_app_name">To-Do</string>
-    <string name="toolbar_title_main">To-Do</string>
+    <string name="nav_header_app_name">ToDoIt</string>
+    <string name="toolbar_title_main">ToDoIt</string>
     <string name="todos">To-Do\'s</string>
     <string name="home">All tasks</string>
     <string name="calendar_view">Calendar</string>

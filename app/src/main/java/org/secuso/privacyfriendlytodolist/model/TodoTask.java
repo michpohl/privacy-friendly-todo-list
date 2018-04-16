@@ -22,7 +22,6 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import org.secuso.privacyfriendlytodolist.model.database.DBQueryHandler;
-import org.secuso.privacyfriendlytodolist.model.database.DatabaseHelper;
 
 import java.util.ArrayList;
 
