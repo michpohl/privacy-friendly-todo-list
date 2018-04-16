@@ -111,7 +111,7 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
         reminderTime = task.getReminderTime();
         taskName.setText(task.getName());
         listColor = task.getColor();
-        listSelector.setBackgroundColor(getContext().getResources().getColor(task.getColor()));
+        listSelector.setBackgroundColor(task.getColor());
         taskDescription.setText(task.getDescription());
         prioritySelector.setText(Helper.priority2String(context, task.getPriority()));
         taskPriority = task.getPriority();
@@ -325,13 +325,14 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
 
         for (TodoList tl : lists) {
             if (item.getItemId() - 3 == tl.getId()) {
+                setListColor(tl.getColor());
+                listSelector.setBackgroundColor(tl.getColor());
                 this.selectedListID = tl.getId();
                 listSelector.setText(tl.getName());
             } else if (item.getTitle() == getContext().getString(R.string.to_choose_list)) {
                 this.selectedListID = -3;
             }
         }
-
         return super.onMenuItemSelected(featureId, item);
     }
 

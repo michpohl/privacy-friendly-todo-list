@@ -948,7 +948,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void finish(BaseTodo b) {
                         if (b instanceof TodoTask) {
-                            //((TodoTask) b).setListId(helpId);
+//                            ((TodoTask) b).setListId(helpId);
                             sendToDatabase(b);
                             hints();
                             //show List if created in certain list, else show all tasks
