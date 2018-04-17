@@ -95,7 +95,9 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
         task = new TodoTask();
         task.setColor(listColor);
         Log.d("task's color: ", String.valueOf(listColor));
-        listSelector.setBackgroundColor(getContext().getResources().getColor(listColor));
+        dialogTitleEdit.setBackgroundColor(getContext().getResources().getColor(listColor));
+        dialogTitleNew.setBackgroundColor(getContext().getResources().getColor(listColor));
+
         task.setCreated();
 
         //task.setDbState(DBQueryHandler.ObjectStates.INSERT_TO_DB);
@@ -111,7 +113,9 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
         reminderTime = task.getReminderTime();
         taskName.setText(task.getName());
         listColor = task.getColor();
-        listSelector.setBackgroundColor(task.getColor());
+        dialogTitleNew.setBackgroundColor(task.getColor());
+        dialogTitleEdit.setBackgroundColor(task.getColor());
+
         taskDescription.setText(task.getDescription());
         prioritySelector.setText(Helper.priority2String(context, task.getPriority()));
         taskPriority = task.getPriority();
@@ -326,7 +330,9 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
         for (TodoList tl : lists) {
             if (item.getItemId() - 3 == tl.getId()) {
                 setListColor(tl.getColor());
-                listSelector.setBackgroundColor(tl.getColor());
+                dialogTitleNew.setBackgroundColor(tl.getColor());
+                dialogTitleEdit.setBackgroundColor(tl.getColor());
+
                 this.selectedListID = tl.getId();
                 listSelector.setText(tl.getName());
             } else if (item.getTitle() == getContext().getString(R.string.to_choose_list)) {
@@ -355,16 +361,18 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
         for (TodoList tl : lists) {
             if (id == tl.getId() && idExists == true) {
                 listSelector.setText(tl.getName());
-                listSelector.setBackgroundColor(tl.getColor());
+                dialogTitleEdit.setBackgroundColor(tl.getColor());
+                dialogTitleNew.setBackgroundColor(tl.getColor());
+
                 setListColor(tl.getColor());
 
-                Log.d("trying to set color to:", String.valueOf(tl.getColor()));
                 selectedListID = tl.getId();
             } else if (!idExists) {
                 listSelector.setText(getContext().getString(R.string.click_to_choose));
-                listSelector.setBackgroundColor(getContext().getResources().getColor(R.color.my_grey));
+                dialogTitleEdit.setBackgroundColor(getContext().getResources().getColor(R.color.my_grey));
+                dialogTitleEdit.setBackgroundColor(getContext().getResources().getColor(R.color.my_grey));
+
                 setListColor(getContext().getResources().getColor(R.color.my_grey));
-                Log.d("trying to set color to:", String.valueOf(tl.getColor()));
 
                 selectedListID = -3;
             }
