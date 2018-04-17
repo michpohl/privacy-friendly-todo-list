@@ -22,6 +22,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.secuso.privacyfriendlytodolist.R;
+
 import java.util.ArrayList;
 
 /**
@@ -48,7 +50,7 @@ public class TodoList extends BaseTodo implements Parcelable {
                 }
             };
     private ArrayList<TodoTask> tasks = new ArrayList<TodoTask>();
-    private String color = "";
+    private int color = R.color.my_grey;
 
     public TodoList(Parcel parcel) {
 
@@ -82,12 +84,12 @@ public class TodoList extends BaseTodo implements Parcelable {
     }
 
     public int getColor() {
-        Log.d("Color is", color );
-        return Color.parseColor(color);
+
+        return color;
 
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 

@@ -18,6 +18,8 @@
 package org.secuso.privacyfriendlytodolist.view.dialog;
 
 import android.content.Context;
+import android.support.v4.graphics.ColorUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,11 +89,13 @@ public class ProcessTodoListDialog extends FullScreenDialog {
         colorSlider.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i, int i1, int color) {
-                listColor = color;
-                header.setBackgroundColor(color);
+                listColor = ColorUtils.setAlphaComponent(color, 75);
+                header.setBackgroundColor(listColor);
             }
         });
     }
+
+
 
 
 
@@ -108,7 +112,7 @@ public class ProcessTodoListDialog extends FullScreenDialog {
 
                 if (changesMade(listName)) {
                     todoList.setName(listName);
-                    todoList.setColor(String.format("#%06X", (0xFFFFFF & listColor)));
+                    todoList.setColor(listColor);
                     callback.finish(todoList);
                 }
                 self.dismiss();

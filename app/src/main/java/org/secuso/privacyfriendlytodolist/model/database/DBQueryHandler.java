@@ -298,8 +298,8 @@ public class DBQueryHandler {
                         String listName = cursor.getString(cursor.getColumnIndex(TTodoList.COLUMN_NAME));
 
 
-                        String listColor = cursor.getString(cursor.getColumnIndex(TTodoList.COLUMN_COLOR));
-
+                        int listColor = Color.parseColor(cursor.getString(cursor.getColumnIndex(TTodoList.COLUMN_COLOR)));
+                        Log.d("getAlToDoLists: ",  String.format("#%08X", listColor));
 
                         TodoList currentList = new TodoList();
                         currentList.setName(listName);
@@ -318,7 +318,7 @@ public class DBQueryHandler {
         return todoLists;
     }
 
-    private static ArrayList<TodoTask> getTasksByListId(SQLiteDatabase db, int listId, String listName, String listColor) {
+    private static ArrayList<TodoTask> getTasksByListId(SQLiteDatabase db, int listId, String listName, int listColor) {
 
         ArrayList<TodoTask> tasks = new ArrayList<TodoTask>();
         String where = TTodoTask.COLUMN_TODO_LIST_ID + " = " + listId + " AND " + TTodoTask.COLUMN_TRASH + "=0";
@@ -330,7 +330,7 @@ public class DBQueryHandler {
 
                     TodoTask currentTask = extractTodoTask(cursor);
                     currentTask.setListName(listName);
-                    currentTask.setColor(Color.parseColor(listColor));
+                    currentTask.setColor(listColor);
                     currentTask.setSubTasks(getSubTasksByTaskId(db, currentTask.getId()));
                     tasks.add(currentTask);
                 } while (cursor.moveToNext());
@@ -424,7 +424,7 @@ public class DBQueryHandler {
             values.put(TTodoTask.COLUMN_LIST_POSITION, todoTask.getListPosition());
             values.put(TTodoTask.COLUMN_DONE, todoTask.getDone());
             values.put(TTodoTask.COLUMN_TRASH, todoTask.isInTrash());
-            values.put(TTodoTask.COLUMN_COLOR, String.format("#%06X", (0xFFFFFF & todoTask.getColor())));
+            values.put(TTodoTask.COLUMN_COLOR,  String.format("#%08X", todoTask.getColor()));
 
 
             if(todoTask.getDBState() == ObjectStates.INSERT_TO_DB) {
@@ -456,7 +456,7 @@ public class DBQueryHandler {
         // Log.i(TAG, "Changes of list " + currentList.getName() + " were stored in the database.");
 
         if(todoList.getDBState() != ObjectStates.NO_DB_ACTION) {
-            String hexColor = String.format("#%06X", (0xFFFFFF & todoList.getColor()));
+            String hexColor = String.format("#%08X", todoList.getColor());
             Log.d("hexcolor: ", hexColor);
             ContentValues values = new ContentValues();
             values.put(TTodoList.COLUMN_NAME, todoList.getName());

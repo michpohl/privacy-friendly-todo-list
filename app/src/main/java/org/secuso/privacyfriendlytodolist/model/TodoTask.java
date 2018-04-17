@@ -125,7 +125,7 @@ public class TodoTask extends BaseTodo implements Parcelable {
 
     public void setColor(int color) {
         this.color = color;
-        Log.d("Color set for task: ", String.format("#%06X", (0xFFFFFF & color)));
+        Log.d("Color set for task: ",  String.format("#%08X",  color));
     }
 
 
