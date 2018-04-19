@@ -1,8 +1,10 @@
 ﻿# Privacy Friendly To-Do List
 
-This is a fork of SecUSo's To-Do-List for the purpose of adding a few little tweaks for my personal use. Once implemented, I'll add documentation and a new readme.
+This is a fork of SecUSo's To-Do-List for the purpose of adding a few little tweaks for my personal use.
 
-This is all the original information:
+First added feature is a color selector for To-do-lists, so that you can pick a color and all the tasks belonging to that list get tinted the same color, which is helpful in the Task overview to quickly separate what goes where visually. It's a bit clunky, but it works.
+
+Below is all the information from the original readme:
 
 [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=org.secuso.privacyfriendlytodolist)
 
